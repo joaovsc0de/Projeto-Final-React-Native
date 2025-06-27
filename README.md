@@ -4,3 +4,4 @@ Projeto final da matéria de React Native - SERRATEC
 
 # Grupo
 - João Vitor Carneiro
+- Raílla Duarte
