@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import Filmes from "../Filmes";
+import { useTheme } from "../../context";
 
 type StackParamList = {
   Filmes: undefined;
@@ -9,71 +9,85 @@ type StackParamList = {
 
 export default function Sobre() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
+  const { colors } = useTheme(); // ✅ pega as cores do tema
+
   return (
-    <View>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Image
         source={require("../../../assets/image.png")}
         style={styles.imagem}
+        resizeMode="cover"
       />
-      <View style={styles.mural}>
-        <Text style={styles.texto}>
+      <View
+        style={[
+          styles.mural,
+          {
+            backgroundColor: colors.sectionBackground,
+            borderColor: colors.border,
+          },
+        ]}
+      >
+        <Text style={[styles.texto, { color: colors.text }]}>
           Amamos cinema tanto quanto você. Nosso aplicativo foi criado para
           conectar apaixonados por filmes a um mundo de histórias incríveis.
           Aqui, você encontra informações detalhadas, avaliações e recomendações
-          personalizadas tudo para tornar sua experiência cinematográfica ainda
+          personalizadas — tudo para tornar sua experiência cinematográfica ainda
           mais completa. Seja bem-vindo e aproveite cada cena!
         </Text>
       </View>
       <TouchableOpacity
-        style={styles.button}
+        style={[
+          styles.button,
+          {
+            backgroundColor: colors.sectionBackground,
+            borderColor: colors.border,
+          },
+        ]}
         onPress={() => navigation.navigate("Filmes")}
       >
-        <Text style={styles.textoBotao}>Navegar</Text>
+        <Text style={[styles.textoBotao, { color: colors.text }]}>Navegar</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  texto: {
-    fontSize: 20,
-    color: "#651ef7",
-    margin: 10,
-  },
   container: {
     flex: 1,
-    experimental_backgroundImage: "../../../assets/image.png",
   },
   imagem: {
     height: "100%",
+    width: "100%",
+    position: "absolute",
   },
   mural: {
     position: "absolute",
-    backgroundColor: "rgba(240, 235, 235, 0.9)",
     borderRadius: 20,
     width: 400,
     height: 250,
     marginLeft: 6,
     marginTop: 230,
-    opacity: 100,
-    borderColor: "#651ef7",
     borderWidth: 1,
+    padding: 16,
+    justifyContent: "center",
+  },
+  texto: {
+    fontSize: 18,
+    lineHeight: 24,
   },
   button: {
     alignSelf: "center",
     position: "absolute",
-    width: 100,
-    height: 30,
-    backgroundColor: "rgba(240, 235, 235, 0.9)",
+    width: 120,
+    height: 40,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 500,
-    borderColor: "#651ef7",
     borderWidth: 1,
   },
   textoBotao: {
-    alignSelf: "center",
-    color: "#651ef7",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });
