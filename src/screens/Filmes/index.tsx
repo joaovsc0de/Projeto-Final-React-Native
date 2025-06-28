@@ -12,6 +12,7 @@ import api from "../../services/api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput as TextInputType } from "react-native-gesture-handler";
 import { styles } from "../../services/styles/style";
+import { useTheme } from "../../context";
 
 type FilmeType = {
   id: number;
@@ -26,6 +27,8 @@ export default function Filmes() {
   const inputRef = useRef<TextInputType>(null);
   const [filme, setFilme] = useState<FilmeType[]>([]);
 
+  const { colors } = useTheme(); // ✅ pega as cores do tema
+
   const buscar = async () => {
     if (nome.length === 0) {
       Alert.alert("Preencha o campo nome do filme.");
@@ -38,7 +41,6 @@ export default function Filmes() {
           query: nome,
         },
       });
-      console.log(response.data);
 
       if (response.data.results.length === 0) {
         Alert.alert("Filme não encontrado.");
@@ -51,37 +53,40 @@ export default function Filmes() {
       Alert.alert("Erro ao buscar filme.");
     }
   };
+
   function limpar(): void {
     setNome("");
     Keyboard.dismiss();
   }
+
   return (
-    <SafeAreaView>
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.text}>Pesquisar filme: </Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <View style={{ alignItems: "center", padding: 16 }}>
+        <Text style={[styles.text, { color: colors.text }]}>Pesquisar filme:</Text>
         <TextInputType
-          style={styles.input}
+          style={[styles.input, { color: colors.text, borderColor: colors.border }]}
           value={nome}
           onChangeText={(text) => setNome(text)}
           ref={inputRef}
           keyboardType="ascii-capable"
           placeholder="Digite o nome do filme"
+          placeholderTextColor={colors.border}
         />
       </View>
 
       <View style={styles.areaBtn}>
         <TouchableOpacity
-          style={[styles.botao, { backgroundColor: "#651ef7" }]}
+          style={[styles.botao, { backgroundColor: colors.button }]}
           onPress={buscar}
         >
-          <Text style={styles.botaoText}>Buscar</Text>
+          <Text style={[styles.botaoText, { color: colors.buttonText }]}>Buscar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.botao, { backgroundColor: "#0085d1" }]}
+          style={[styles.botao, { backgroundColor: colors.button }]}
           onPress={limpar}
         >
-          <Text style={styles.botaoText}>Limpar</Text>
+          <Text style={[styles.botaoText, { color: colors.buttonText }]}>Limpar</Text>
         </TouchableOpacity>
       </View>
 
@@ -90,7 +95,7 @@ export default function Filmes() {
           data={filme}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <View style={styles.card}>
+            <View style={[styles.card, { backgroundColor: colors.sectionBackground }]}>
               <Image
                 source={{
                   uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
@@ -98,11 +103,11 @@ export default function Filmes() {
                 style={styles.poster}
               />
               <View style={{ flex: 1, paddingLeft: 10 }}>
-                <Text style={styles.cardTitle}>{item.title}</Text>
-                <Text style={styles.cardSubtitle}>
+                <Text style={[styles.cardTitle, { color: colors.text }]}>{item.title}</Text>
+                <Text style={[styles.cardSubtitle, { color: colors.text }]}>
                   Lançamento: {item.release_date}
                 </Text>
-                <Text numberOfLines={3} style={styles.cardOverview}>
+                <Text numberOfLines={3} style={[styles.cardOverview, { color: colors.text }]}>
                   {item.overview}
                 </Text>
               </View>

@@ -1,18 +1,19 @@
-import { View, Text, StatusBar } from 'react-native'
-import React from 'react'
-import Home from './src/screens/Home'
-import { NavigationContainer } from '@react-navigation/native'
-import AppRouter from './src/routes'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Feather } from '@expo/vector-icons'
-import Turismo from './src/screens/Filmes'
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import AppRouter from './src/routes';
+import { ThemeProvider } from './src/context/index'; 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useTheme } from '../../context';
 
-const Tab = createBottomTabNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <StatusBar/>
-      <AppRouter/>
-    </NavigationContainer>
-  )
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <StatusBar />
+          <AppRouter />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ThemeProvider>  );
 }
