@@ -1,11 +1,11 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Home from '../screens/Home';
 import Filmes from '../screens/Filmes';
 import Sobre from '../screens/Sobre';
 import CustomDrawer from '../components/CustomDrawer';
 import { useTheme } from '../context';
 import ThemeToggleButton from '../components/Button';
+import mainStack from './mainStack'; 
 
 const Drawer = createDrawerNavigator();
 
@@ -26,13 +26,14 @@ export default function AppRouter() {
         drawerActiveTintColor: isDark ? '#773bf4' : '#773bf4',
         headerTintColor: isDark ? '#773bf4' : '#773bf4',
         headerTitleStyle: {
-          color: isDark ? '#000' : '#000', 
+          color: isDark ? '#000' : '#000',
           fontWeight: 'bold',
         },
         headerRight: () => <ThemeToggleButton />,
       }}
     >
-      <Drawer.Screen name="Home" component={Home} options={{ title: 'Início' }} />
+      {/* ✅ Substitui Home por MainStack */}
+      <Drawer.Screen name="Home" component={mainStack} options={{ title: 'Início' }} />
       <Drawer.Screen name="Filmes" component={Filmes} />
       <Drawer.Screen name="Sobre nós" component={Sobre} />
     </Drawer.Navigator>
