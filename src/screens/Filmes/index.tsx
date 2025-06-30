@@ -15,6 +15,7 @@ import { styles } from "../../services/styles/style";
 import { useTheme } from "../../context";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/native";
+import Connection from "../../components/Connection";
 
 type FilmeType = {
   id: number;
@@ -31,7 +32,7 @@ type ResultType = {
   total_results: number
 };
 type StackParamList = {
-  Details: { id: number };
+  Filmes: undefined;
 };
 
 export default function Filmes() {
@@ -95,13 +96,13 @@ export default function Filmes() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      
-      <View style={{ alignItems: "center", padding: 16 }}>
-        <Text style={[styles.text, { color: colors.text }]}>Pesquisar filme:</Text>
-        <Image 
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+  <Connection />  
+      <Image 
       source={require('../../../assets/image1.png')}
       style={styles.img} />
+      <View style={{ alignItems: "center", padding: 16 }}>
+        <Text style={[styles.text, { color: colors.text }]}>Pesquisar filme:</Text>
         <TextInputType
           style={[styles.input, { color: colors.text, borderColor: colors.border }]}
           value={nome}
@@ -165,6 +166,7 @@ export default function Filmes() {
           )}
         />
       )}
-    </SafeAreaView>
+      
+    </View>
   );
 }

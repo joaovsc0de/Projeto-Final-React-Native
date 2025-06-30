@@ -1,15 +1,17 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTheme } from "../../context";
+import Connection from "../../components/Connection";
 
 type StackParamList = {
   Filmes: undefined;
 };
 
+
 export default function Sobre() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
-  const { colors } = useTheme(); // ✅ pega as cores do tema
+  const { colors }:any = useTheme(); // ✅ pega as cores do tema
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -47,6 +49,7 @@ export default function Sobre() {
       >
         <Text style={[styles.textoBotao, { color: colors.text }]}>Navegar</Text>
       </TouchableOpacity>
+      <Connection />
     </View>
   );
 }

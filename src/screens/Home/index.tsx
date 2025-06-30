@@ -13,9 +13,9 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 
-
 import api from "../../services/api"; 
 import { useTheme } from "../../context";
+import Connection from "../../components/Connection";
 
 const POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -27,7 +27,6 @@ export default function Home({ navigation }) {
   const [upcoming, setUpcoming] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
  
   useEffect(() => {
     (async () => {
@@ -64,8 +63,10 @@ export default function Home({ navigation }) {
 
   return (
     <LinearGradient colors={[colors.background, "#000"]} style={styles.container}>
+      <Connection/>
       {/* Header */}
       <View style={styles.header}>
+       
         <Text style={[styles.headerText, { color: colors.text }]}>Início</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Search")}>
           <Ionicons name="search" size={26} color={colors.text} />
@@ -114,6 +115,7 @@ export default function Home({ navigation }) {
           />
         </ScrollView>
       )}
+      
     </LinearGradient>
   );
 }
