@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     borderRadius: 10,
+    backgroundColor: "#651ef7",
   },
   botaoText: {
     fontSize: 16,
@@ -74,6 +75,11 @@ cardOverview: {
   fontSize: 12,
   color: "#333",
   marginTop: 8,
+},
+img:{
+  width:200,
+  height: 200,
+  alignSelf: "center",
 }
 });
 

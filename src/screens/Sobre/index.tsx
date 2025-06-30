@@ -14,7 +14,7 @@ export default function Sobre() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Image
-        source={require("../../../assets/image.png")}
+        source={require("../../../assets/backg.png")}
         style={styles.imagem}
         resizeMode="cover"
       />

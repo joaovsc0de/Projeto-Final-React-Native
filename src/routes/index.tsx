@@ -1,11 +1,11 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Filmes from '../screens/Filmes';
 import Sobre from '../screens/Sobre';
 import CustomDrawer from '../components/CustomDrawer';
 import { useTheme } from '../context';
 import ThemeToggleButton from '../components/Button';
 import mainStack from './mainStack'; 
+import Filmes from '../screens/Filmes';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +32,6 @@ export default function AppRouter() {
         headerRight: () => <ThemeToggleButton />,
       }}
     >
-      {/* ✅ Substitui Home por MainStack */}
       <Drawer.Screen name="Home" component={mainStack} options={{ title: 'Início' }} />
       <Drawer.Screen name="Filmes" component={Filmes} />
       <Drawer.Screen name="Sobre nós" component={Sobre} />

@@ -27,5 +27,9 @@ cardOverview: {
   fontSize: 12,
   color: "#333",
   marginTop: 8,
+},
+img:{
+  width:20,
+  height: 20
 }
 })
