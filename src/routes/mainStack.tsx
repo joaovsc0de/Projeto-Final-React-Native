@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import detalheFilme from '../screens/detalheFilme/detalheFilme';
 import Filmes from '../screens/Filmes';
+import Splash from '../screens/Splash';
 
 const Stack = createStackNavigator();
 

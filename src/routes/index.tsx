@@ -10,7 +10,7 @@ import Filmes from '../screens/Filmes';
 const Drawer = createDrawerNavigator();
 
 export default function AppRouter() {
-  const { theme } = useTheme();
+  const { theme }:any = useTheme();
   const isDark = theme === 'dark';
 
   return (
