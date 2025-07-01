@@ -2,14 +2,13 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   text: {
-    marginTop: 25,
-    marginBottom: 15,
+    marginBottom: 25,
     fontSize: 25,
     fontWeight: "bold",
-    color:"#651ef7"
+    color: "#651ef7",
   },
   input: {
     backgroundColor: "#fff",
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 15,
     justifyContent: "center",
-    gap:10
+    gap: 10,
   },
   botao: {
     height: 50,
@@ -49,37 +48,40 @@ export const styles = StyleSheet.create({
     fontSize: 22,
   },
   card: {
-  flexDirection: "row",
-  backgroundColor: "#fff",
-  marginHorizontal: 10,
-  marginVertical: 5,
-  borderRadius: 10,
-  elevation: 3,
-  padding: 10,
-},
-poster: {
-  width: 100,
-  height: 150,
-  borderRadius: 8,
-},
-cardTitle: {
-  fontSize: 16,
-  fontWeight: "bold",
-},
-cardSubtitle: {
-  fontSize: 14,
-  color: "#555",
-  marginTop: 4,
-},
-cardOverview: {
-  fontSize: 12,
-  color: "#333",
-  marginTop: 8,
-},
-img:{
-  width:200,
-  height: 200,
-  alignSelf: "center",
-}
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    marginHorizontal: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+    elevation: 3,
+    padding: 10,
+  },
+  poster: {
+    width: 100,
+    height: 150,
+    borderRadius: 8,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginLeft: 20,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  cardSubtitle: {
+    fontSize: 14,
+    color: "#555",
+    marginTop: 4,
+  },
+  cardOverview: {
+    fontSize: 12,
+    color: "#333",
+    marginTop: 8,
+  },
+  img: {
+    width: 225,
+    height: 250,
+    alignSelf: "center",
+    marginTop: 20,
+  },
 });
-
