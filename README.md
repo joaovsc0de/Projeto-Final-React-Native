@@ -7,3 +7,4 @@ Projeto final da matéria de React Native - SERRATEC
 - Raílla Duarte
 - Matheus Ruella
 - Jhonatan Martins
+- Juliana
