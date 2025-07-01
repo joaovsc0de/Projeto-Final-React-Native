@@ -1,6 +1,6 @@
+// AppRouter.tsx
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Filmes from "../screens/Filmes";
 import Sobre from "../screens/Sobre";
 import CustomDrawer from "../components/CustomDrawer";
 import { useTheme } from "../context";
@@ -8,6 +8,7 @@ import ThemeToggleButton from "../components/Button";
 import mainStack from "./mainStack";
 import Login from "../screens/Login";
 import Cadastro from "../screens/Cadastro";
+import pesquisar from "./pesquisa";
 
 const Drawer = createDrawerNavigator();
 
@@ -39,7 +40,11 @@ export default function AppRouter() {
         component={mainStack}
         options={{ title: "Início" }}
       />
-      <Drawer.Screen name="Filmes" component={Filmes} />
+      <Drawer.Screen
+        name="Filmes"
+        component={pesquisar}
+        options={{ title: "Pesquisar Filmes" }}
+      />
       <Drawer.Screen name="Sobre nós" component={Sobre} />
       <Drawer.Screen name="Login" component={Login} />
       <Drawer.Screen name="Cadastro" component={Cadastro} />

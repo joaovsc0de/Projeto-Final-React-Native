@@ -16,7 +16,7 @@ import { useTheme } from "../../context";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/native";
 import Connection from "../../components/Connection";
-
+import { FilmesStackParamList } from "../../routes/pesquisa";
 type FilmeType = {
   id: number;
   title: string;
@@ -36,7 +36,7 @@ type StackParamList = {
 };
 
 export default function Filmes() {
-  const navigation = useNavigation<NavigationProp<StackParamList>>();
+  const navigation = useNavigation<NavigationProp<FilmesStackParamList>>();
   const [nome, setNome] = useState("");
   const inputRef = useRef<TextInputType>(null);
   const [filmes, setFilme] = useState<FilmeType[]>([]);
@@ -166,12 +166,9 @@ export default function Filmes() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={[
-                styles.card,
-                { backgroundColor: colors.sectionBackground },
-              ]}
-              //  onPress={() => navigation.navigate("Details", { id: item.id })}
-            >
+  style={[styles.card, { backgroundColor: colors.sectionBackground }]}
+  onPress={() => navigation.navigate("detalheFilmes", { id: item.id })}
+>
               <Image
                 source={{
                   uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
