@@ -17,7 +17,7 @@ export default function FilmesStack() {
       <Stack.Screen
         name="Filmes"
         component={Filmes}
-        options={{ title: 'Pesquisar Filmes' }}
+        options={{ headerShown: false  }}
       />
       <Stack.Screen
         name="detalheFilmes"
