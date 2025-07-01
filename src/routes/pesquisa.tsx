@@ -2,7 +2,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Filmes from '../screens/Filmes';
-import DetalheFilme from '../screens/detalheFilme/detalheFilme';
+import DetalheFilme from '../screens/detalheFilme';
 
 export type FilmesStackParamList = {
   Filmes: undefined;
