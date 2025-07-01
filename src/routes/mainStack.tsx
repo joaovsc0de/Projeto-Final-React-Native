@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Home";
-import detalheFilme from "../screens/detalheFilme/detalheFilme";
+import detalheFilme from "../screens/detalheFilme";
 import Filmes from "../screens/Filmes";
 import Splash from "../screens/Splash";
 import Login from "../screens/Login";
