@@ -1,10 +1,3 @@
-// MovieDetails.js – tela de detalhes do filme
-// -------------------------------------------------------------
-// • Recebe o parâmetro `id` via navigation (Stack)
-// • Busca detalhes do TMDB usando o axios configurado (services/api.ts)
-// • Exibe pôster grande, título, avaliação, gêneros, duração e sinopse
-// • Compatível com Expo (usa expo-linear-gradient e @expo/vector-icons)
-
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -13,17 +6,16 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
-  TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
 import { useRoute, useNavigation } from "@react-navigation/native";
-
-import api from "../../services/api"; // ajuste o caminho se precisar
+import api from "../../services/api";
 import { useTheme } from "../../context";
+import { Ionicons } from "@expo/vector-icons";
 
 const POSTER_URL = "https://image.tmdb.org/t/p/w500";
 const BACKDROP_URL = "https://image.tmdb.org/t/p/w780";
+const { width } = Dimensions.get("window");
 
 export default function MovieDetails() {
   const { colors } = useTheme();
@@ -42,7 +34,6 @@ export default function MovieDetails() {
         setDetails(res.data);
         navigation.setOptions({ title: res.data.title });
       } catch (e) {
-        console.error("Erro ao buscar detalhes:", e.message);
         setError(true);
       } finally {
         setLoading(false);
@@ -69,9 +60,7 @@ export default function MovieDetails() {
   }
 
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Backdrop */}
       {details.backdrop_path && (
         <Image
@@ -79,42 +68,36 @@ export default function MovieDetails() {
           style={styles.backdrop}
         />
       )}
-      {/* Poster sobre a backdrop */}
-      <View style={styles.posterWrapper}>
+
+      {/* Poster e Infos */}
+      <View style={styles.headerContent}>
         <Image
           source={{ uri: POSTER_URL + details.poster_path }}
           style={styles.poster}
         />
-      </View>
-
-      {/* Título e infos principais */}
-      <View style={styles.content}>
-        <Text style={[styles.title, { color: colors.text }]}>
-          {details.title}
-        </Text>
-
-        <View style={styles.row}>
-          <Ionicons name="star" size={16} color="#ffd700" />
-          <Text style={[styles.vote, { color: colors.text }]}>
-            {details.vote_average.toFixed(1)} ({details.vote_count})
+        <View style={styles.textContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>
+            {details.title}
           </Text>
-          <Text style={[styles.dot, { color: colors.text }]}>•</Text>
-          <Text style={[styles.runtime, { color: colors.text }]}>
-            {" "}
-            {details.runtime} min
+          <View style={styles.row}>
+            <Ionicons name="star" size={16} color="#ffd700" />
+            <Text style={[styles.vote, { color: colors.text }]}>
+              {details.vote_average.toFixed(1)} ({details.vote_count})
+            </Text>
+            <Text style={[styles.dot, { color: colors.text }]}>•</Text>
+            <Text style={[styles.runtime, { color: colors.text }]}>
+              {details.runtime} min
+            </Text>
+          </View>
+          <Text style={[styles.genres, { color: colors.text }]}>
+            {details.genres.map((g) => g.name).join(", ")}
           </Text>
         </View>
+      </View>
 
-        {/* Gêneros */}
-        <Text style={[styles.genres, { color: colors.text }]}>
-          {" "}
-          {details.genres.map((g) => g.name).join(", ")}{" "}
-        </Text>
-
-        {/* Sinopse */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>
-          Sinopse
-        </Text>
+      {/* Sinopse */}
+      <View style={[styles.card, { backgroundColor: colors.sectionBackground }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Sinopse</Text>
         <Text style={[styles.overview, { color: colors.text }]}>
           {details.overview}
         </Text>
@@ -125,22 +108,47 @@ export default function MovieDetails() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  backdrop: { width: "100%", height: 200 },
-  posterWrapper: {
-    position: "absolute",
-    top: 140,
-    left: 16,
-    elevation: 4,
+  backdrop: { width: "100%", height: 220, resizeMode: "cover" },
+  headerContent: {
+    flexDirection: "row",
+    marginTop: -60,
+    paddingHorizontal: 16,
   },
-  poster: { width: 120, height: 180, borderRadius: 8 },
-  content: { marginTop: 100, paddingHorizontal: 16 },
-  title: { fontSize: 24, fontWeight: "700" },
-  row: { flexDirection: "row", alignItems: "center", marginTop: 6 },
+  poster: {
+    width: 120,
+    height: 180,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#fff",
+    backgroundColor: "#ccc",
+  },
+  textContainer: {
+    flex: 1,
+    paddingLeft: 16,
+    justifyContent: "center",
+  },
+  title: { fontSize: 20, fontWeight: "bold", marginBottom: 6 },
+  row: { flexDirection: "row", alignItems: "center", marginBottom: 6 },
   vote: { marginLeft: 4, fontSize: 14 },
   dot: { marginHorizontal: 6 },
   runtime: { fontSize: 14 },
-  genres: { marginTop: 4, fontStyle: "italic" },
-  sectionTitle: { marginTop: 16, fontSize: 18, fontWeight: "600" },
-  overview: { marginTop: 8, lineHeight: 20, textAlign: "justify" },
-  loaderContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
+  genres: { fontStyle: "italic", fontSize: 14 },
+  sectionTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 8 },
+  overview: { fontSize: 14, lineHeight: 20, textAlign: "justify" },
+  card: {
+    marginTop: 20,
+    marginHorizontal: 16,
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

@@ -6,24 +6,24 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  ScrollView,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useRef, useState } from "react";
 import api from "../../services/api";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput as TextInputType } from "react-native-gesture-handler";
-import { styles } from "../../services/styles/style";
 import { useTheme } from "../../context";
-import { useNavigation } from "expo-router";
-import { NavigationProp } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import Connection from "../../components/Connection";
-import { FilmesStackParamList } from "../../routes/pesquisa";
+import { styles } from "../../services/styles/style";
+
 type FilmeType = {
   id: number;
   title: string;
   release_date: string;
   overview: string;
   poster_path: string;
-  vote_rating: string;
 };
 
 type ResultType = {
@@ -31,14 +31,10 @@ type ResultType = {
   total_pages: number;
   total_results: number;
 };
-type StackParamList = {
-  Filmes: undefined;
-};
 
 export default function Filmes() {
-  const navigation = useNavigation<NavigationProp<FilmesStackParamList>>();
+  const { colors }: any = useTheme();
   const [nome, setNome] = useState("");
-  const inputRef = useRef<TextInputType>(null);
   const [filmes, setFilme] = useState<FilmeType[]>([]);
   const [busca, setBusca] = useState<boolean>(false);
   const [resultadoPesquisa, setResult] = useState<ResultType>({
@@ -47,7 +43,7 @@ export default function Filmes() {
     total_results: 0,
   });
 
-  const { colors }: any = useTheme();
+  const navigation = useNavigation();
 
   const buscar = async () => {
     if (nome.length === 0) {
@@ -57,9 +53,7 @@ export default function Filmes() {
 
     try {
       const response = await api.get("/search/movie", {
-        params: {
-          query: nome,
-        },
+        params: { query: nome },
       });
 
       if (response.data.total_results === 0) {
@@ -82,97 +76,97 @@ export default function Filmes() {
   function limpar(): void {
     setNome("");
     setFilme([]);
-    setResult({
-      page: 0,
-      total_pages: 0,
-      total_results: 0,
-    });
+    setResult({ page: 0, total_pages: 0, total_results: 0 });
     setBusca(false);
     Keyboard.dismiss();
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <Connection />
-      <Image
-        source={require("../../../assets/image1.png")}
-        style={styles.img}
-      />
-      <View style={{ alignItems: "center", padding: 16 }}>
-        <Text style={[styles.text, { color: colors.text }]}>
-          Pesquisar filme:
-        </Text>
-        <TextInputType
-          style={[
-            styles.input,
-            { color: colors.text, borderColor: colors.border },
-          ]}
-          value={nome}
-          onChangeText={(text) => setNome(text)}
-          ref={inputRef}
-          keyboardType="ascii-capable"
-          placeholder="Digite o nome do filme"
-          placeholderTextColor={colors.border}
-          onPress={limpar}
-        />
-      </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        style={{ flex: 1, backgroundColor: colors.background }}
+        contentContainerStyle={{ paddingBottom: 20 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Connection />
 
-      <View style={styles.areaBtn}>
-        <TouchableOpacity style={[styles.botao, {}]} onPress={buscar}>
-          <Text style={[styles.botaoText, { color: colors.buttonText }]}>
-            Buscar
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.botao} onPress={limpar}>
-          <Text style={[styles.botaoText, { color: colors.buttonText }]}>
-            Limpar
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {resultadoPesquisa.total_pages > 0 && nome.length > 0 ? (
-        <View>
-          <Text
-            style={[
-              styles.cardTitle,
-              {
-                color: colors.text,
-                marginLeft: 20,
-                marginTop: 10,
-                marginBottom: 20,
-              },
-            ]}
-          >
-            Total de resultados:{resultadoPesquisa.total_results}{" "}
-          </Text>
+        {/* Imagem central */}
+        <View style={{ alignItems: "center", marginTop: 10 }}>
+          <Image
+            source={require("../../../assets/image1.png")}
+            style={{ width: 150, height: 150, resizeMode: "contain" }}
+          />
         </View>
-      ) : resultadoPesquisa.total_pages == 0 && busca == true ? (
-        <Text
-          style={[
-            styles.cardTitle,
-            {
-              color: colors.text,
-            },
-          ]}
-        >
-          Não foram encotrados resultados para sua pesquisa.
-        </Text>
-      ) : (
-        <Text></Text>
-      )}
-      {filmes.length > 0 && (
+
+        {/* Campo de busca */}
+        <View style={{ alignItems: "center", padding: 16 }}>
+          <Text style={[styles.text, { color: colors.text }]}>
+            Pesquisar filme:
+          </Text>
+          <TextInput
+            style={[
+              styles.input,
+              { color: colors.text, borderColor: colors.border },
+            ]}
+            value={nome}
+            onChangeText={(text) => setNome(text)}
+            placeholder="Digite o nome do filme"
+            placeholderTextColor={colors.border}
+          />
+        </View>
+
+        {/* Botões */}
+        <View style={[styles.areaBtn, { marginBottom: 10 }]}>
+          <TouchableOpacity
+            style={[styles.botao, { backgroundColor: "#651ef7" }]}
+            onPress={buscar}
+          >
+            <Text style={[styles.botaoText, { color: colors.buttonText }]}>
+              Buscar
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.botao, { backgroundColor: "#651ef7" }]}
+            onPress={limpar}
+          >
+            <Text style={[styles.botaoText, { color: colors.buttonText }]}>
+              Limpar
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Resultado de busca */}
+        {busca && (
+          <View style={{ paddingHorizontal: 16 }}>
+            {resultadoPesquisa.total_results > 0 ? (
+              <Text style={[styles.cardTitle, { color: colors.text }]}>
+                Total de resultados: {resultadoPesquisa.total_results}
+              </Text>
+            ) : (
+              <Text style={[styles.cardTitle, { color: colors.text }]}>
+                Nenhum resultado encontrado.
+              </Text>
+            )}
+          </View>
+        )}
+
+        {/* Lista de filmes */}
         <FlatList
           data={filmes}
           keyExtractor={(item) => item.id.toString()}
+          scrollEnabled={false} // FlatList dentro de ScrollView
+          contentContainerStyle={{ padding: 16 }}
           renderItem={({ item }) => (
             <TouchableOpacity
-  style={[styles.card, { backgroundColor: colors.sectionBackground }]}
-  onPress={() => navigation.navigate("detalheFilmes", { id: item.id })}
->
+              style={[styles.card, { backgroundColor: colors.sectionBackground }]}
+              onPress={() => navigation.navigate("detalheFilmes", { id: item.id })}
+            >
               <Image
-                source={{
-                  uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
-                }}
+                source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
                 style={styles.poster}
               />
               <View style={{ flex: 1, paddingLeft: 10 }}>
@@ -192,7 +186,7 @@ export default function Filmes() {
             </TouchableOpacity>
           )}
         />
-      )}
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
