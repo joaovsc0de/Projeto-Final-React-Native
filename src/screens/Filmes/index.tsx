@@ -12,6 +12,8 @@ import {
   Platform,
 } from "react-native";
 import { useRef, useState } from "react";
+import { Animated, Easing } from "react-native";
+import { useEffect } from "react";
 import api from "../../services/api";
 import { useTheme } from "../../context";
 import { useNavigation } from "@react-navigation/native";
@@ -44,6 +46,28 @@ export default function Filmes() {
   });
 
   const navigation = useNavigation();
+
+   // Animação de pulsação
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1.1,
+          duration: 800,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 1,
+          duration: 800,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, []);
 
   const buscar = async () => {
     if (nome.length === 0) {
@@ -93,14 +117,19 @@ export default function Filmes() {
       >
         <Connection />
 
-        {/* Imagem central */}
+        {/* Imagem central com animação */}
         <View style={{ alignItems: "center", marginTop: 10 }}>
-          <Image
+          <Animated.Image
             source={require("../../../assets/image1.png")}
-            style={{ width: 150, height: 150, resizeMode: "contain" }}
+            style={{
+              width: 150,
+              height: 150,
+              resizeMode: "contain",
+              transform: [{ scale: pulseAnim }],
+            }}
           />
         </View>
-
+        
         {/* Campo de busca */}
         <View style={{ alignItems: "center", padding: 16 }}>
           <Text style={[styles.text, { color: colors.text }]}>

@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import React from "react";
 
+
+
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 type StackParamList = {
   Cadastro: undefined;

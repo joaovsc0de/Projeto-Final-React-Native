@@ -78,8 +78,8 @@ export default function Home({ navigation }: any) {
       {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.headerText, { color: colors.text }]}>Início</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-          <Ionicons name="search" size={26} color={colors.text} />
+       <TouchableOpacity onPress={() => navigation.navigate("Filmes")}>
+        <Ionicons name="search" size={26} color={colors.text} />
         </TouchableOpacity>
       </View>
 
@@ -141,4 +141,3 @@ export default function Home({ navigation }: any) {
   );
 }
 
-// --------------------------- ESTILOS ---------------------------
