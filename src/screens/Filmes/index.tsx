@@ -7,7 +7,7 @@ import {
   FlatList,
   Image,
 } from "react-native";
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import api from "../../services/api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput as TextInputType } from "react-native-gesture-handler";
@@ -27,9 +27,9 @@ type FilmeType = {
 };
 
 type ResultType = {
-  page: number
-  total_pages: number
-  total_results: number
+  page: number;
+  total_pages: number;
+  total_results: number;
 };
 type StackParamList = {
   Filmes: undefined;
@@ -44,11 +44,10 @@ export default function Filmes() {
   const [resultadoPesquisa, setResult] = useState<ResultType>({
     page: 0,
     total_pages: 0,
-    total_results: 0
+    total_results: 0,
   });
 
-
-  const { colors }:any = useTheme(); // ✅ pega as cores do tema
+  const { colors }: any = useTheme();
 
   const buscar = async () => {
     if (nome.length === 0) {
@@ -67,19 +66,16 @@ export default function Filmes() {
         setBusca(true);
       } else {
         setFilme(response.data.results);
-        setResult(
-          {
-            page: response.data.page,
-            total_pages: response.data.total_pages,
-            total_results: response.data.total_results
-          });
+        setResult({
+          page: response.data.page,
+          total_pages: response.data.total_pages,
+          total_results: response.data.total_results,
+        });
         setBusca(true);
       }
       Keyboard.dismiss();
     } catch (error) {
       console.error("Erro:", error);
-      
-      
     }
   };
 
@@ -89,22 +85,28 @@ export default function Filmes() {
     setResult({
       page: 0,
       total_pages: 0,
-      total_results: 0
-    })
+      total_results: 0,
+    });
     setBusca(false);
     Keyboard.dismiss();
   }
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-  <Connection />  
-      <Image 
-      source={require('../../../assets/image1.png')}
-      style={styles.img} />
+      <Connection />
+      <Image
+        source={require("../../../assets/image1.png")}
+        style={styles.img}
+      />
       <View style={{ alignItems: "center", padding: 16 }}>
-        <Text style={[styles.text, { color: colors.text }]}>Pesquisar filme:</Text>
+        <Text style={[styles.text, { color: colors.text }]}>
+          Pesquisar filme:
+        </Text>
         <TextInputType
-          style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+          style={[
+            styles.input,
+            { color: colors.text, borderColor: colors.border },
+          ]}
           value={nome}
           onChangeText={(text) => setNome(text)}
           ref={inputRef}
@@ -116,36 +118,59 @@ export default function Filmes() {
       </View>
 
       <View style={styles.areaBtn}>
-        <TouchableOpacity
-          style={[styles.botao, { backgroundColor: '#651ef7' }]}
-          onPress={buscar}
-        >
-          <Text style={[styles.botaoText, { color: colors.buttonText }]}>Buscar</Text>
+        <TouchableOpacity style={[styles.botao, {}]} onPress={buscar}>
+          <Text style={[styles.botaoText, { color: colors.buttonText }]}>
+            Buscar
+          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.botao, { backgroundColor: '#651ef7' }]}
-          onPress={limpar}
-        >
-          <Text style={[styles.botaoText, { color: colors.buttonText }]}>Limpar</Text>
+        <TouchableOpacity style={styles.botao} onPress={limpar}>
+          <Text style={[styles.botaoText, { color: colors.buttonText }]}>
+            Limpar
+          </Text>
         </TouchableOpacity>
       </View>
-      {resultadoPesquisa.total_pages > 0 && nome.length > 0 ?
+      {resultadoPesquisa.total_pages > 0 && nome.length > 0 ? (
         <View>
-          <Text style={[styles.cardTitle, { color: colors.text, marginLeft: 20, marginTop: 10, marginBottom: 20 }]}>Total de resultados:{resultadoPesquisa.total_results} </Text>
+          <Text
+            style={[
+              styles.cardTitle,
+              {
+                color: colors.text,
+                marginLeft: 20,
+                marginTop: 10,
+                marginBottom: 20,
+              },
+            ]}
+          >
+            Total de resultados:{resultadoPesquisa.total_results}{" "}
+          </Text>
         </View>
-        : resultadoPesquisa.total_pages == 0 && busca == true ?
-          <Text style={[styles.cardTitle, { color: colors.text, marginLeft: 20, marginTop: 10, marginBottom: 20 }]}>Não foram encotrados resultados para sua pesquisa.</Text>
-          : <Text></Text>
-      }
+      ) : resultadoPesquisa.total_pages == 0 && busca == true ? (
+        <Text
+          style={[
+            styles.cardTitle,
+            {
+              color: colors.text,
+            },
+          ]}
+        >
+          Não foram encotrados resultados para sua pesquisa.
+        </Text>
+      ) : (
+        <Text></Text>
+      )}
       {filmes.length > 0 && (
         <FlatList
           data={filmes}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity 
-            style={[styles.card, { backgroundColor: colors.sectionBackground }]}
-            //  onPress={() => navigation.navigate("Details", { id: item.id })}
+            <TouchableOpacity
+              style={[
+                styles.card,
+                { backgroundColor: colors.sectionBackground },
+              ]}
+              //  onPress={() => navigation.navigate("Details", { id: item.id })}
             >
               <Image
                 source={{
@@ -154,11 +179,16 @@ export default function Filmes() {
                 style={styles.poster}
               />
               <View style={{ flex: 1, paddingLeft: 10 }}>
-                <Text style={[styles.cardTitle, { color: colors.text }]}>{item.title}</Text>
+                <Text style={[styles.cardTitle, { color: colors.text }]}>
+                  {item.title}
+                </Text>
                 <Text style={[styles.cardSubtitle, { color: colors.text }]}>
                   Lançamento: {item.release_date}
                 </Text>
-                <Text numberOfLines={3} style={[styles.cardOverview, { color: colors.text }]}>
+                <Text
+                  numberOfLines={3}
+                  style={[styles.cardOverview, { color: colors.text }]}
+                >
                   {item.overview}
                 </Text>
               </View>
@@ -166,7 +196,6 @@ export default function Filmes() {
           )}
         />
       )}
-      
     </View>
-  );
+  );
 }

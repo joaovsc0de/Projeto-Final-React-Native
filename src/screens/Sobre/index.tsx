@@ -3,15 +3,15 @@ import React, { useEffect } from "react";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTheme } from "../../context";
 import Connection from "../../components/Connection";
+import { styles } from "./style";
 
 type StackParamList = {
   Filmes: undefined;
 };
 
-
 export default function Sobre() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
-  const { colors }:any = useTheme(); // ✅ pega as cores do tema
+  const { colors }: any = useTheme();
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -33,8 +33,8 @@ export default function Sobre() {
           Amamos cinema tanto quanto você. Nosso aplicativo foi criado para
           conectar apaixonados por filmes a um mundo de histórias incríveis.
           Aqui, você encontra informações detalhadas, avaliações e recomendações
-          personalizadas — tudo para tornar sua experiência cinematográfica ainda
-          mais completa. Seja bem-vindo e aproveite cada cena!
+          personalizadas — tudo para tornar sua experiência cinematográfica
+          ainda mais completa. Seja bem-vindo e aproveite cada cena!
         </Text>
       </View>
       <TouchableOpacity
@@ -53,44 +53,3 @@ export default function Sobre() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  imagem: {
-    height: "100%",
-    width: "100%",
-    position: "absolute",
-  },
-  mural: {
-    position: "absolute",
-    borderRadius: 20,
-    width: 400,
-    height: 250,
-    marginLeft: 6,
-    marginTop: 230,
-    borderWidth: 1,
-    padding: 16,
-    justifyContent: "center",
-  },
-  texto: {
-    fontSize: 18,
-    lineHeight: 24,
-  },
-  button: {
-    alignSelf: "center",
-    position: "absolute",
-    width: 120,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 500,
-    borderWidth: 1,
-  },
-  textoBotao: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
