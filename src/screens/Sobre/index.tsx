@@ -1,13 +1,16 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import React from "react";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useTheme } from "../../context";
 import Connection from "../../components/Connection";
 import { styles } from "./style";
-
-type StackParamList = {
-  Filmes: undefined;
-};
+import { StackParamList } from "./types";
 
 export default function Sobre() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
@@ -17,38 +20,32 @@ export default function Sobre() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Image
         source={require("../../../assets/backg.png")}
-        style={styles.imagem}
+        style={styles.backgroundImage}
         resizeMode="cover"
       />
-      <View
-        style={[
-          styles.mural,
-          {
-            backgroundColor: colors.sectionBackground,
-            borderColor: colors.border,
-          },
-        ]}
-      >
-        <Text style={[styles.texto, { color: colors.text }]}>
-          Amamos cinema tanto quanto você. Nosso aplicativo foi criado para
-          conectar apaixonados por filmes a um mundo de histórias incríveis.
-          Aqui, você encontra informações detalhadas, avaliações e recomendações
-          personalizadas — tudo para tornar sua experiência cinematográfica
-          ainda mais completa. Seja bem-vindo e aproveite cada cena!
+
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.title}>Sobre o CineVerse</Text>
+        <Text style={styles.paragraph}>
+          O CineVerse nasceu da nossa paixão por histórias contadas através da tela.
+          Nosso objetivo é conectar fãs de cinema com as melhores obras, trailers atualizados,
+          recomendações personalizadas e uma comunidade que ama cinema tanto quanto você.
         </Text>
-      </View>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          {
-            backgroundColor: colors.sectionBackground,
-            borderColor: colors.border,
-          },
-        ]}
-        onPress={() => navigation.navigate("Filmes")}
-      >
-        <Text style={[styles.textoBotao, { color: colors.text }]}>Navegar</Text>
-      </TouchableOpacity>
+
+        <Text style={styles.paragraph}>
+          Com um design intuitivo e funcionalidades pensadas para você, o CineVerse transforma sua
+          experiência cinematográfica em algo único. Prepare a pipoca e explore o universo dos filmes
+          de forma mais imersiva!
+        </Text>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Filmes")}
+        >
+          <Text style={styles.buttonText}>Explorar Filmes</Text>
+        </TouchableOpacity>
+      </ScrollView>
+
       <Connection />
     </View>
   );
