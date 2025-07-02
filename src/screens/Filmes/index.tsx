@@ -54,7 +54,7 @@ export default function Filmes() {
     Animated.loop(
       Animated.sequence([
         Animated.timing(pulseAnim, {
-          toValue: 1.1,
+          toValue: 1.4,
           duration: 800,
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
@@ -117,8 +117,10 @@ export default function Filmes() {
       >
         <Connection />
 
+        
+
         {/* Imagem central com animação */}
-        <View style={{ alignItems: "center", marginTop: 10 }}>
+        <View style={{ alignItems: "center", marginTop: 20 }}>
           <Animated.Image
             source={require("../../../assets/image1.png")}
             style={{
@@ -147,6 +149,7 @@ export default function Filmes() {
           />
         </View>
 
+            
         {/* Botões */}
         <View style={[styles.areaBtn, { marginBottom: 10 }]}>
           <TouchableOpacity

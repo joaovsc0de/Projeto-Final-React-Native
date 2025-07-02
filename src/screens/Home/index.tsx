@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   FlatList,
   Image,
   TouchableOpacity,
@@ -22,33 +21,35 @@ const POSTER_URL = "https://image.tmdb.org/t/p/w500";
 export default function Home({ navigation }: any) {
   const { colors }: any = useTheme();
 
-  const [popular, setPopular] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
+  // 🔄 Requisição de dados
   useEffect(() => {
     (async () => {
       try {
-        const [popRes, topRes, upRes] = await Promise.all([
+        const [popularRes, topRatedRes, upcomingRes] = await Promise.all([
           api.get("movie/popular", { params: { page: 1 } }),
           api.get("movie/top_rated", { params: { page: 1 } }),
           api.get("movie/upcoming", { params: { page: 1 } }),
         ]);
 
-        setPopular(popRes.data.results);
-        setTopRated(topRes.data.results);
-        setUpcoming(upRes.data.results);
-      } catch (e: any) {
-        console.error("Erro ao buscar filmes:", e.message);
-        setError(true);
+        setPopularMovies(popularRes.data.results);
+        setTopRatedMovies(topRatedRes.data.results);
+        setUpcomingMovies(upcomingRes.data.results);
+      } catch (err: any) {
+        console.error("Erro ao carregar filmes:", err.message);
+        setHasError(true);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
   }, []);
 
+  // 🎞️ Renderiza cada pôster de filme
   const renderPoster = ({ item }: any) => (
     <TouchableOpacity
       style={styles.card}
@@ -70,41 +71,39 @@ export default function Home({ navigation }: any) {
   );
 
   return (
-    <LinearGradient
-      colors={[colors.background, "#000"]}
-      style={styles.container}
-    >
+    <LinearGradient colors={[colors.background, "#000"]} style={styles.container}>
       <Connection />
-      {/* Header */}
+
+      {/* 🔝 Cabeçalho */}
       <View style={styles.header}>
-        <Text style={[styles.headerText, { color: colors.text }]}>Início</Text>
-       <TouchableOpacity onPress={() => navigation.navigate("Filmes")}>
-        <Ionicons name="search" size={26} color={colors.text} />
+        <Text style={[styles.headerText, { color: colors.text }]}>🎬 Início</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Filmes")}>
+          <Ionicons name="search" size={26} color={colors.text} />
         </TouchableOpacity>
       </View>
 
-      {/* Loader / Error */}
-      {loading && (
+      {/* ⏳ Carregando */}
+      {isLoading && (
         <ActivityIndicator
           size="large"
           color={colors.primary || "#e50914"}
           style={styles.loader}
         />
       )}
-      {!loading && error && (
+
+      {/* ❌ Erro ao carregar */}
+      {!isLoading && hasError && (
         <Text style={[styles.errorText, { color: colors.text }]}>
-          Não foi possível carregar os filmes.
+          Oops! Algo deu errado ao carregar os filmes. 😢
         </Text>
       )}
 
-      {/* Conteúdo */}
-      {!loading && !error && (
-        <ScrollView>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Populares
-          </Text>
+      {/* ✅ Conteúdo Principal */}
+      {!isLoading && !hasError && (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>🔥 Populares</Text>
           <FlatList
-            data={popular}
+            data={popularMovies}
             renderItem={renderPoster}
             horizontal
             keyExtractor={(item: any) => String(item.id)}
@@ -112,11 +111,9 @@ export default function Home({ navigation }: any) {
             contentContainerStyle={styles.flatList}
           />
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Mais Bem Avaliados
-          </Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>🏆 Mais Bem Avaliados</Text>
           <FlatList
-            data={topRated}
+            data={topRatedMovies}
             renderItem={renderPoster}
             horizontal
             keyExtractor={(item: any) => String(item.id)}
@@ -124,11 +121,9 @@ export default function Home({ navigation }: any) {
             contentContainerStyle={styles.flatList}
           />
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Em Breve
-          </Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>🎥 Em Breve</Text>
           <FlatList
-            data={upcoming}
+            data={upcomingMovies}
             renderItem={renderPoster}
             horizontal
             keyExtractor={(item: any) => String(item.id)}
@@ -140,4 +135,3 @@ export default function Home({ navigation }: any) {
     </LinearGradient>
   );
 }
-

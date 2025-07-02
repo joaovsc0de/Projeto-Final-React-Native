@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: "600",
+    fontSize: 20,
+    fontWeight: "800",
     marginTop: 20,
     marginLeft: 16,
     marginBottom: 10,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     alignItems: "center", 
   },
   card: {
-    width: 120,
+    width: 110,
     height: 180,
     marginRight: 12,
     borderRadius: 12,
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
   right: 0,
   bottom: 0,
   height: 30,
-  backgroundColor: "rgba(0, 0, 0, 0.9)",
+  backgroundColor: "rgba(22, 22, 22, 0.9)",
   justifyContent: "center", 
   alignItems: "center",     
 },

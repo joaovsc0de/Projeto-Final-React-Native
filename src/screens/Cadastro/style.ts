@@ -2,25 +2,24 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {},
+
   textInput: {
-    backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: "#ddd",
     borderRadius: 5,
     width: "90%",
     padding: 10,
     fontSize: 18,
     alignSelf: "center",
   },
+
   input: {
-    borderColor: "#ddd",
-    borderRadius: 5,
     width: "90%",
     padding: 10,
     fontSize: 18,
     marginTop: 10,
     alignSelf: "center",
   },
+
   img: {
     marginTop: 50,
     marginBottom: 40,
@@ -28,6 +27,7 @@ export const styles = StyleSheet.create({
     height: 200,
     alignSelf: "center",
   },
+
   button: {
     marginTop: 30,
     alignSelf: "center",
@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#651ef7",
     borderColor: "#fff",
   },
+
   buttonText: {
     marginTop: 10,
     alignSelf: "center",

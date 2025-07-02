@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 0,
-    opacity: 0.5,
+    opacity: 0.1,
   },
   content: {
     flexGrow: 1,
@@ -27,14 +27,14 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     textAlign: "justify",
-    marginBottom: 16,
+    marginBottom: 10,
     backgroundColor: "rgba(0, 0, 0, 0.25)", 
     padding: 16,
     borderRadius: 12,
     color: "#fff",
   },
   button: {
-    marginTop: 20,
+    marginTop: 50,
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 10,
@@ -47,4 +47,26 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  profileButton: {
+  flexDirection: "row",
+  alignItems: "center",
+  marginVertical: 8,
+  paddingHorizontal: 16,
+},
+
+avatar: {
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  marginRight: 12,
+  borderWidth: 1,
+  borderColor: "#ccc",
+},
+
+profileName: {
+  fontSize: 16,
+  fontWeight: "600",
+},
+
 });
+
