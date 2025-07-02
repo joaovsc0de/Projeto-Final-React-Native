@@ -1,21 +1,25 @@
-import { StyleSheet } from "react-native";
-
-export const styles = StyleSheet.create({
-  texto: {
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "bold",
-    marginBottom: 20
-  },
-  drawer: {
-    width: "100%",
-    height: 85,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+const styles = StyleSheet.create({
+  
   container: {
-    flex:1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 20,
+  },
+  image: {
+    width: 70,
+    height: 70,
+  },
+  texto: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    width: "100%",
+  },
+  drawerList: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+    gap: 25,
   },
 });
