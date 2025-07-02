@@ -10,7 +10,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
 import api from "../../services/api";
-import { useTheme } from "../../context";
+import { useTheme } from '../../context'; 
 import { styles } from "./styles";
 
 const POSTER_URL = "https://image.tmdb.org/t/p/w500";
@@ -58,45 +58,56 @@ export default function MovieDetails() {
     );
   }
 
-  return (
-    <LinearGradient
-      colors={['#f5f7fa', '#c3cfe2']}
-      style={{ flex: 1 }}
-    >
-      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-        {details.backdrop_path && (
-          <Image
-            source={{ uri: BACKDROP_URL + details.backdrop_path }}
-            style={styles.backdrop}
-          />
-        )}
+ return (
+  <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+      {details.backdrop_path && (
+        <Image
+          source={{ uri: BACKDROP_URL + details.backdrop_path }}
+          style={styles.backdrop}
+        />
+      )}
 
-        <View style={styles.headerContent}>
-          <Image
-            source={{ uri: POSTER_URL + details.poster_path }}
-            style={styles.poster}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.title}>{details.title}</Text>
-            <View style={styles.row}>
-              <Ionicons name="star" size={16} color="#ffd700" />
-              <Text style={styles.vote}>
-                {details.vote_average.toFixed(1)} ({details.vote_count})
-              </Text>
-              <Text style={styles.dot}>•</Text>
-              <Text style={styles.runtime}>{details.runtime} min</Text>
-            </View>
-            <Text style={styles.genres}>
-              {details.genres.map((g) => g.name).join(", ")}
+      <View style={styles.headerContent}>
+        <Image
+          source={{ uri: POSTER_URL + details.poster_path }}
+          style={styles.poster}
+        />
+        <View style={styles.textContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>
+            {details.title}
+          </Text>
+          <View style={styles.row}>
+            <Ionicons name="star" size={16} color="#ffd700" />
+            <Text style={[styles.vote, { color: colors.text }]}>
+              {details.vote_average.toFixed(1)} ({details.vote_count})
+            </Text>
+            <Text style={[styles.dot, { color: colors.text }]}>•</Text>
+            <Text style={[styles.runtime, { color: colors.text }]}>
+              {details.runtime} min
             </Text>
           </View>
+          <Text style={[styles.genres, { color: colors.text }]}>
+            {details.genres.map((g) => g.name).join(", ")}
+          </Text>
         </View>
+      </View>
 
-        <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Sinopse</Text>
-          <Text style={styles.overview}>{details.overview}</Text>
-        </View>
-      </ScrollView>
-    </LinearGradient>
-  );
+      <View
+        style={[
+          styles.card,
+          { backgroundColor: colors.sectionBackground },
+        ]}
+      >
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>
+          Sinopse
+        </Text>
+        <Text style={[styles.overview, { color: colors.text }]}>
+          {details.overview}
+        </Text>
+      </View>
+    </ScrollView>
+  </View>
+);
+
 }

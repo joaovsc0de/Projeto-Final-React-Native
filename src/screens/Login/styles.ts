@@ -1,52 +1,55 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-around",
- 
-  },
-  textInput: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
-    width: "90%",
-    padding: 10,
-    fontSize: 18,
-    alignSelf: "center",
-  },
-  input: {
-    borderColor: "#ddd",
-    borderRadius: 5,
-    width: "90%",
-    padding: 10,
-    fontSize: 18,
-    marginTop: 10,
-    alignSelf: "center",
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 40,
+    paddingHorizontal: 20,
   },
   img: {
-    marginTop: 50,
-    marginBottom: 40,
-    width: 200,
-    height: 200,
+    width: 180,
+    height: 180,
+    marginBottom: 30,
     alignSelf: "center",
+  },
+  label: {
+    alignSelf: "flex-start",
+    fontSize: 16,
+    marginBottom: 6,
+    marginTop: 12,
+    fontWeight: "600",
+  },
+  textInput: {
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    marginTop: 30,
+    width: "100%",
+    alignItems: "center",
+    gap: 15,
   },
   button: {
-    marginTop: 20,
-    alignSelf: "center",
-    borderWidth: 1,
-    width: 190,
+    width: 200,
     height: 50,
-    borderRadius: 15,
     backgroundColor: "#651ef7",
-    borderColor: "#fff",
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 3,
+  },
+  buttonSecondary: {
+    backgroundColor: "#444", // para cadastro
   },
   buttonText: {
-    marginTop: 10,
-    alignSelf: "center",
-    fontSize: 20,
     color: "#fff",
+    fontSize: 18,
     fontWeight: "bold",
   },
 });

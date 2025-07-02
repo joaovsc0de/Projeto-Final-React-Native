@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 6,
-    color: "#222",
+    color: "#222", // Mantém o texto preto
     textShadowColor: 'rgba(0, 0, 0, 0.1)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
@@ -45,20 +45,20 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
-    color: "#111",
+    color: "#111", // Cor do título da seção
   },
   overview: {
     fontSize: 14,
     lineHeight: 20,
     textAlign: "justify",
-    color: "#222",
+    color: "#222", // Cor da sinopse
   },
   card: {
     marginTop: 20,
     marginHorizontal: 16,
     padding: 16,
     borderRadius: 12,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(255,255,255,0.1)', // Card com fundo semi-transparente
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,

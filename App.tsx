@@ -6,6 +6,7 @@ import { ThemeProvider } from "./src/context/index";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Splash from "./src/screens/Splash";
 import NetInfo from "@react-native-community/netinfo";
+import { AuthProvider } from "./src/context/AuthContext";
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -17,7 +18,8 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeProvider>
+     <AuthProvider> 
+      <ThemeProvider>
       <SafeAreaProvider>
         <StatusBar />
         {showSplash ? (
@@ -29,5 +31,6 @@ export default function App() {
         )}
       </SafeAreaProvider>
     </ThemeProvider>
+    </AuthProvider>
   );
 }
