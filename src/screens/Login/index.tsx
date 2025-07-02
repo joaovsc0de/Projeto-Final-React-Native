@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-
+import { useState } from "react";
 
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -17,18 +17,28 @@ type StackParamList = {
 };
 export default function Login() {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const handleLogin = () => {
+    if (email === "teste@email.com" && senha === "123456") {
+      alert("Login realizado com sucesso!");
+    } else {
+      alert("Email ou senha inválidos.");
+    }
+  };
   return (
     <SafeAreaView>
       <Image style={styles.img} source={require("../../../assets/icone.png")} />
       <View>
         <Text style={styles.input}>Email:</Text>
-        <TextInput style={styles.textInput} placeholder="Digite seu email" />
+        <TextInput style={styles.textInput} placeholder="Digite seu email" value={email} onChangeText={setEmail} />
         <Text style={styles.input}>Senha:</Text>
-        <TextInput style={styles.textInput} placeholder="Digite sua senha" />
+        <TextInput style={styles.textInput} placeholder="Digite sua senha" secureTextEntry value={senha} onChangeText={setSenha} />
       </View>
 
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
