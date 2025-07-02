@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   header: {
     marginTop: 20,
     paddingHorizontal: 20,
@@ -11,62 +12,70 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   headerText: {
     fontSize: 26,
     fontWeight: "700",
   },
+
   loader: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 40,
   },
+
   errorText: {
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 20,
+    fontSize: 16,
   },
+
   sectionTitle: {
     fontSize: 20,
     fontWeight: "800",
-    marginTop: 20,
+    marginTop: 24,
     marginLeft: 16,
     marginBottom: 10,
   },
+
   flatList: {
-    paddingHorizontal: 4,
-    alignItems: "center", 
+    paddingLeft: 16,
+    paddingRight: 8,
   },
+
   card: {
-    width: 110,
+    width: 120,
     height: 180,
     marginRight: 12,
     borderRadius: 12,
     overflow: "hidden",
-    backgroundColor: "rgba(0,0,0,0.6)", 
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.6)",
+    justifyContent: "flex-end",
   },
+
   poster: {
     width: "100%",
     height: "100%",
-  },
- overlay: {
-  position: "absolute",
-  left: 0,
-  right: 0,
-  bottom: 0,
-  height: 30,
-  backgroundColor: "rgba(22, 22, 22, 0.9)",
-  justifyContent: "center", 
-  alignItems: "center",     
-},
-  title: {
     position: "absolute",
-    bottom: 4,
-    left: 4,
-    right: 4,
+  },
+
+  overlay: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 40,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+  },
+
+  title: {
     color: "#fff",
     fontSize: 12,
     fontWeight: "600",
     textAlign: "center",
+    paddingHorizontal: 4,
+    paddingBottom: 6,
+    zIndex: 1,
   },
 });

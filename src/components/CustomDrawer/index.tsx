@@ -14,7 +14,7 @@ export default function CustomDrawer(props: any) {
           source={require("../../../assets/icone.png")}
           style={{ width: 70, height: 70}}
         />
-        <Text style={styles.texto}>Bem Vindo!</Text>
+        <Text style={styles.texto}>Bem-Vindo (a)!</Text>
       </View>
       <View style={{ marginTop: 10, paddingHorizontal: 10, gap: 25 }}>
         <DrawerItemList {...props} />

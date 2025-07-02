@@ -76,7 +76,7 @@ export default function Home({ navigation }: any) {
 
       {/* 🔝 Cabeçalho */}
       <View style={styles.header}>
-        <Text style={[styles.headerText, { color: colors.text }]}>🎬 Início</Text>
+        <Text style={[styles.headerText, { color: colors.text }]}>Início</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Filmes")}>
           <Ionicons name="search" size={26} color={colors.text} />
         </TouchableOpacity>
